@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block title %}home - default{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+</style>
+{% endblock %}
+
+
+{% block body %}
+<h1>
+    {% if name %}
+        Hello, {{ name }}!
+    {% else %}
+        Hello, Stranger!
+    {% endif %}
+</h1>
+{% endblock %}
