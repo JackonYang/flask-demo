@@ -1,5 +1,6 @@
 # -*- Encoding: utf-8 -*-
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,\
+    session, redirect, url_for
 from .forms import NameForm
 
 bp = Blueprint('default', __name__)
@@ -7,13 +8,12 @@ bp = Blueprint('default', __name__)
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    name = None
     form = NameForm()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
+        session['name'] = form.name.data
+        return redirect(url_for('default.index'))
     return render_template('default/index.html',
-                           form=form, name=name)
+                           form=form, name=session.get('name'))
 
 
 @bp.route('/user/<name>')
