@@ -1,18 +1,15 @@
 # -*- Encoding: utf-8 -*-
 from flask import Flask
 
-app = Flask(__name__)
+
+def make_app():
+    app = Flask(__name__)
+    registe_routes(app)
+    return app
 
 
-@app.route('/')
-def index():
-    return '<h1>Hello World!</h1>'
-
-
-@app.route('/user/<name>')
-def user(name):
-    return '<h1>Hello, %s!</h1>' % name
-
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+def registe_routes(app):
+    """Register routes."""
+    import views
+    app.register_blueprint(views.bp)
+    # print app.url_map
