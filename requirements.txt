@@ -1,0 +1,23 @@
+# Flask packages
+
+flask  # Successfully installed flask Werkzeug Jinja2 itsdangerous MarkupSafe
+flask-script
+
+# templates
+jinja2
+flask-bootstrap
+flask-moment
+
+# form
+flask-wtf
+
+# database
+flask-sqlalchemy
+flask-migrate
+
+# utils
+flask-mail
+
+# redis==2.10.3
+# Markdown
+# supervisor
