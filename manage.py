@@ -1,11 +1,14 @@
 # -*- Encoding: utf-8 -*-
 from flask.ext.script import Manager
+from flask.ext.migrate import MigrateCommand
 from app import make_app
 
 PORT = 8000  # debug mode
 
 app = make_app()
 manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
 
 
 @manager.command
