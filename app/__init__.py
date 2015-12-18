@@ -13,6 +13,7 @@ def make_app(config_name):
         print 'load default config instead.'
         config_obj = load_default()
     app.config.from_object(config_obj)
+    config_obj.init_app(app)
 
     db.init_app(app)
     migrate = Migrate(app, db)  # noqa
