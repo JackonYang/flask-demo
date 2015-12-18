@@ -5,7 +5,7 @@ from app import make_app
 
 PORT = 8000  # debug mode
 
-app = make_app()
+app = make_app('development')
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)

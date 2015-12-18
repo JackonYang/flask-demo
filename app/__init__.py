@@ -1,17 +1,18 @@
 # -*- Encoding: utf-8 -*-
 from flask import Flask
 from flask.ext.migrate import Migrate
+from config import load_config, load_default
 from .models import db  # sql
 
 
-def make_app():
+def make_app(config_name):
     app = Flask(__name__)
 
-    # used by flask-wtf for CSRF protection
-    app.config['SECRET_KEY'] = 'hard to guess string'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    config_obj = load_config(config_name)
+    if not config_obj:
+        print 'load default config instead.'
+        config_obj = load_default()
+    app.config.from_object(config_obj)
 
     db.init_app(app)
     migrate = Migrate(app, db)  # noqa
